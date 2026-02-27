@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Clock, BarChart2, Zap, Lightbulb } from 'lucide-react';
 import type { SimplifyResponse } from '../types/apiTypes';
 
 interface CognitivePanelProps {
@@ -62,7 +63,7 @@ const CognitivePanel: React.FC<CognitivePanelProps> = ({ result }) => {
 
           <div className="metrics-row">
             <div className="metric-card">
-              <span className="metric-icon">⏱️</span>
+              <Clock size={20} className="metric-icon" />
               <div className="metric-content">
                 <span className="metric-label">Reading Time</span>
                 <span className="metric-value">
@@ -71,14 +72,14 @@ const CognitivePanel: React.FC<CognitivePanelProps> = ({ result }) => {
               </div>
             </div>
             <div className="metric-card">
-              <span className="metric-icon">📊</span>
+              <BarChart2 size={20} className="metric-icon" />
               <div className="metric-content">
                 <span className="metric-label">Difficulty</span>
                 <span className="metric-value">{result ? result.difficulty : '—'}</span>
               </div>
             </div>
             <div className="metric-card">
-              <span className="metric-icon">✨</span>
+              <Zap size={20} className="metric-icon" />
               <div className="metric-content">
                 <span className="metric-label">Reduction</span>
                 <span className="metric-value">
@@ -117,7 +118,7 @@ const CognitivePanel: React.FC<CognitivePanelProps> = ({ result }) => {
 
         <div className="cog-impact-section">
           <div className="impact-header">
-            <span className="impact-icon">💡</span>
+            <Lightbulb size={20} className="impact-icon" />
             <h3 className="impact-title">Impact Summary</h3>
           </div>
           <p className="impact-body">

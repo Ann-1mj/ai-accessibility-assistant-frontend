@@ -73,14 +73,20 @@ const History: React.FC = () => {
             </div>
             {expanded.has(s.id) && (
               <div className="history-details">
-                <p className="history-label">Original text</p>
-                <p className="history-text">{s.original}</p>
+                <div className="history-section">
+                  <p className="history-label">Original text</p>
+                  <p className="history-text">{s.original}</p>
+                </div>
 
-                <p className="history-label">Simplified version</p>
-                <p className="history-text">{s.simplified}</p>
+                <div className="history-section">
+                  <p className="history-label">Simplified version</p>
+                  <p className="history-text">{s.simplified}</p>
+                </div>
 
-                <p className="history-label">Cognitive improvement</p>
-                <p className="history-text">{s.scoreBefore - s.scoreAfter} points</p>
+                <div className="history-section">
+                  <p className="history-label">Cognitive improvement</p>
+                  <p className="history-text">{s.scoreBefore - s.scoreAfter} points</p>
+                </div>
 
                 {s.audioUrl && (
                   <button className="history-audio-button">
