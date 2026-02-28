@@ -46,6 +46,25 @@ const Simplifier: React.FC<SimplifierProps> = ({ userId, onUserIdChange }) => {
 
   return (
     <>
+      <header className="simplifier-header">
+        <motion.h1
+          className="simplifier-title"
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
+          AI‑Accessibility Assistant
+        </motion.h1>
+        <motion.p
+          className="simplifier-subtitle"
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+        >
+          Helping Neurodiverse Students Read With Ease
+        </motion.p>
+      </header>
+
       <section className="card app-section app-section-centered">
         <TextInput
           text={text}

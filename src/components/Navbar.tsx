@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 type NavKey = 'home' | 'simplifier' | 'dashboard' | 'history' | 'settings' | 'about';
 
@@ -13,7 +14,13 @@ const Navbar: React.FC<NavbarProps> = ({ active = 'simplifier', onChange }) => {
   };
 
   return (
-    <nav className="navbar-root" aria-label="Primary navigation">
+    <motion.nav
+      className="navbar-root"
+      aria-label="Primary navigation"
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+    >
       <div className="navbar-track">
         <button
           type="button"
@@ -204,7 +211,7 @@ const Navbar: React.FC<NavbarProps> = ({ active = 'simplifier', onChange }) => {
           </span>
         </button>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

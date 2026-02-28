@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px; /* base font slightly larger */
   background: #0f172a;
   color: #e5e7eb;
 }
@@ -11,13 +12,24 @@ body {
 
 .app-root {
   min-height: 100vh;
-  background-color: #020617;
-  /* subtle dotted grid background */
-  background-image: radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.16) 1px, transparent 0);
-  background-size: 26px 26px;
+  /* deep gradient with subtle overlay grid */
+  background: linear-gradient(135deg, #0f172a 0%, #020617 70%, #01040e 100%);
   color: #e5e7eb;
 }
 
+/* keep grid faint on top */
+.app-root::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.18) 1px, transparent 0);
+  background-size: 26px 26px;
+  opacity: 0.8;
+}
 .app-shell {
   max-width: 1120px;
   margin: 0 auto;
@@ -56,12 +68,18 @@ body {
 
 .card {
   border-radius: 1.25rem;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid #020617;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.8);
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
   padding: 1.5rem;
+  transition: background 0.25s ease;
 }
 
+.card:hover {
+  background: rgba(15, 23, 42, 0.5);
+}
 .app-section {
   display: flex;
   flex-direction: column;
@@ -232,36 +250,38 @@ body {
   padding-inline: 1.8rem;
 }
 
-/* Primary button – pill with subtle blue glow */
+/* Primary button – gradient with enhanced hover */
 .primary-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  padding: 0.7rem 1.8rem;
+  padding: 0.8rem 2rem;
   border-radius: 999px;
-  border: 1px solid rgba(56, 189, 248, 0.55);
-  background-color: #0ea5e9;
-  color: #0f172a;
-  font-weight: 600;
+  border: 1px solid rgba(99, 102, 241, 0.5);
+  background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+  color: #f9fafb;
+  font-weight: 700;
+  font-size: 1rem;
   letter-spacing: 0.02em;
   box-shadow:
-    0 10px 26px rgba(15, 23, 42, 0.85),
-    0 0 10px rgba(56, 189, 248, 0.45);
+    0 8px 24px rgba(99, 102, 241, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   cursor: pointer;
   transition:
-    transform 0.16s ease,
-    box-shadow 0.16s ease,
-    filter 0.16s ease,
-    background-color 0.16s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease,
+    background 0.25s ease;
 }
 
 .primary-button:hover:not(:disabled) {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   box-shadow:
-    0 14px 30px rgba(15, 23, 42, 0.95),
-    0 0 14px rgba(56, 189, 248, 0.55);
-  filter: brightness(1.05);
+    0 14px 35px rgba(99, 102, 241, 0.5),
+    0 0 20px rgba(139, 92, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  filter: brightness(1.1);
 }
 
 .primary-button:disabled {
@@ -291,14 +311,14 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
-  font-size: 0.9rem;
+  font-size: 1.1rem; /* larger overall text for more visibility */
 }
 
 .text-input-field label {
-  font-size: 0.75rem;
+  font-size: 0.85rem; /* bigger label */
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #9ca3af;
+  color: #f1f5f9; /* near white for visibility */
 }
 
 .text-input-field input,
@@ -306,19 +326,23 @@ body {
   border-radius: 999px;
   border: 1px solid #1f2937;
   background: #020617;
-  color: #e5e7eb;
-  padding: 0.6rem 1.1rem;
-  font-size: 0.9rem;
+  color: #f9fafb; /* whiter text */
+  padding: 0.8rem 1.2rem; /* a bit more padding */
+  font-size: 1.1rem; /* match larger label size */
   min-width: 220px;
 }
 
+.text-input-field input::placeholder,
+.text-input-field textarea::placeholder {
+  color: #cbd5e1;
+}
 .text-input-field textarea {
   border-radius: 1.25rem;
   border: 1px solid #1f2937;
   background: #020617;
-  color: #e5e7eb;
-  padding: 0.9rem 1.1rem;
-  font-size: 0.9rem;
+  color: #f9fafb; /* whiter text */
+  padding: 1rem 1.2rem;
+  font-size: 1.1rem;
   resize: vertical;
 }
 
@@ -937,6 +961,25 @@ body {
 .progress-status {
   background: rgba(6, 182, 212, 0.1);
   border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+/* SIMPLIFIER HEADER */
+.simplifier-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.simplifier-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0;
+}
+
+.simplifier-subtitle {
+  font-size: 1rem;
+  color: #cbd5e1;
+  margin: 0.25rem 0 0;
 }
 
 /* SETTINGS PAGE */
@@ -1581,11 +1624,12 @@ body {
 }
 
 .text-input-container.dark .primary-button {
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-  color: #fff;
+  background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+  color: #f9fafb;
+  border-color: rgba(99, 102, 241, 0.5);
 }
 .text-input-container.dark .primary-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  background: linear-gradient(90deg, #7c3aed 0%, #a855f7 100%);
 }
 .text-input-container.dark .primary-button:disabled {
   background: #4b5563;

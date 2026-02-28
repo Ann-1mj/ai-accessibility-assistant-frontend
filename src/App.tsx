@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import Dashboard from './pages/Dashboard';
 import Simplifier from './pages/Simplifier';
 import Settings from './pages/Settings';
@@ -28,10 +29,22 @@ const App: React.FC = () => {
         {activeNav === 'home' && (
           <section className="landing">
             <div className="landing-inner">
-              <h1 className="landing-title">Cognitive Accessibility Platform</h1>
-              <p className="landing-subtitle">
+              <motion.h1
+                className="landing-title"
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, ease: 'easeOut' }}
+              >
+                Cognitive Accessibility Platform
+              </motion.h1>
+              <motion.p
+                className="landing-subtitle"
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
+              >
                 Adapt complex text for diverse cognitive needs using AI.
-              </p>
+              </motion.p>
               <button
                 type="button"
                 className="primary-button landing-button"
